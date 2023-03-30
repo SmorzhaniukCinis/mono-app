@@ -1,12 +1,17 @@
 import React from 'react';
-import Header from "./components/Surface/Header";
+import Header from "./components/Surface/Header/Header";
+import Footer from "./components/Surface/Footer";
+import Container from "./components/Surface/Container";
+import Box from "@mui/material/Box";
 
 function App(): JSX.Element {
 
     return (
-        <div className="App">
+        <Box sx={{backgroundColor: 'secondary.main'}}>
           <Header/>
-        </div>
+          <Container/>
+          <Footer/>
+        </Box>
     );
 }
 
