@@ -10,34 +10,35 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ffffff',
+      main: "#ffffff"
     },
     secondary: {
-      main: '#e3d9ec',
-    },
-  },
+      main: "#e3d9ec"
+    }
+  }
 });
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     children: [
       {
         path: "exchange",
-        element: <div>exchange</div>,
+        element: <div>exchange</div>
       },
       {
         path: "profile",
-        element: <div><Outlet/></div>,
+        element: <div><Outlet /></div>,
         children: [
           {
-            path: 'test',
-            index: true,
-            element: <div>test</div>
+            path: "test",
+            element:
+              <div> test</div>
+
           },
           {
-            path: 'test2',
+            path: "test2",
             index: true,
             element: <div>test2</div>
           }
@@ -45,24 +46,24 @@ const router = createBrowserRouter([
       },
       {
         path: "transaction",
-        element: <div>transaction</div>,
+        element: <div>transaction</div>
       },
       {
         path: "authorization",
-        element: <div>authorization</div>,
-      },
-    ],
+        element: <div>authorization</div>
+      }
+    ]
   }
 ]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router}/>
+        <RouterProvider router={router} />
       </ThemeProvider>
     </Provider>
   </React.StrictMode>

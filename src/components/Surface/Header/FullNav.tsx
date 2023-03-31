@@ -2,6 +2,8 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { Menu, MenuItem } from "@mui/material";
 import Box from "@mui/material/Box";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 
 const FullNav: React.FC = () => {
 
@@ -19,24 +21,17 @@ const FullNav: React.FC = () => {
       <Button sx={{ fontSize: 15, fontWeight: "bold" }} color="inherit">
         Exchange rate
       </Button>
-      <Button sx={{ fontSize: 15, fontWeight: "bold" }} color="inherit"
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+      <Button sx={{ fontSize: 15, fontWeight: "bold" }}
+              color="inherit"
               onClick={handleClick}
+              endIcon={<KeyboardArrowDownIcon/>}
       >
         Profile
       </Button>
-      <Menu id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{ "aria-labelledby": "basic-button" }}
-      >
-        <MenuItem onClick={handleClose}>Information</MenuItem>
-        <MenuItem onClick={handleClose}>Account</MenuItem>
-        <MenuItem onClick={handleClose}>Jars</MenuItem>
+      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <MenuItem sx={{ fontSize: 15, fontWeight: "bold" }} onClick={handleClose}>Information</MenuItem>
+        <MenuItem sx={{ fontSize: 15, fontWeight: "bold" }} onClick={handleClose}>Account</MenuItem>
+        <MenuItem sx={{ fontSize: 15, fontWeight: "bold" }} onClick={handleClose}>Jars</MenuItem>
       </Menu>
       <Button sx={{ fontSize: 15, fontWeight: "bold" }} color="inherit">
         Transaction
