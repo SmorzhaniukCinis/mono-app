@@ -2,6 +2,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['publicData']
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const configureAppStore = (initialState = {}) => {
@@ -11,8 +20,8 @@ const configureAppStore = (initialState = {}) => {
   const middleware = [sagaMiddleware];
 
   const store = configureStore({
-    reducer: rootReducer,
-    middleware: (gDM) => gDM().concat([...middleware]),
+    reducer: persistedReducer,
+    middleware: (gDM) => gDM({serializableCheck: false}).concat([...middleware]),
     preloadedState: initialState,
     devTools: process.env.NODE_ENV !== 'production',
   });
@@ -22,6 +31,8 @@ const configureAppStore = (initialState = {}) => {
 };
 
 export const store = configureAppStore();
+export const persistor = persistStore(store)
+
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

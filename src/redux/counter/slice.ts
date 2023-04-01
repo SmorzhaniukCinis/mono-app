@@ -1,33 +1,23 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { currencyType } from "../../API/PublicDataTypes";
 
-export interface ICounterSlice {
-  value: number;
+export interface initialStateType {
+  currency: currencyType[];
 }
 
-const initialState: ICounterSlice = {
-  value: 0,
+const initialState: initialStateType = {
+  currency: []
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const publicDataSlice = createSlice({
+  name: "publicData",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
-    incrementAsync: (state) => {},
-    decrementAsync: (state) => {},
-    incrementByAmountAsync: (state, action: PayloadAction<number>) => {},
-    incrementByAmountAsyncSuccess: (state) => {},
-    incrementByAmountAsyncFailure: (state) => {},
-  },
+    setCurrency: (state, action: PayloadAction<currencyType[]>) => {
+      state.currency = action.payload;
+    }
+  }
 });
 
-export const { actions: counterActions, reducer: counterReducer } =
-  counterSlice;
+export default publicDataSlice.reducer;
+export const {setCurrency} = publicDataSlice.actions;

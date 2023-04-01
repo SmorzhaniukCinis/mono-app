@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import "./index.css";
-import { store } from "./redux/store";
+import { persistor, store } from "./redux/store";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
+import { PersistGate } from "redux-persist/integration/react";
 
 const theme = createTheme({
   palette: {
@@ -26,7 +27,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+        <PersistGate persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>
