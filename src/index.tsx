@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import "./index.css";
-import App from "./App";
 import { store } from "./redux/store";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
 
 const theme = createTheme({
   palette: {
@@ -18,43 +18,6 @@ const theme = createTheme({
   }
 });
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "exchange",
-        element: <div>exchange</div>
-      },
-      {
-        path: "profile",
-        element: <div><Outlet /></div>,
-        children: [
-          {
-            path: "test",
-            element:
-              <div> test</div>
-
-          },
-          {
-            path: "test2",
-            index: true,
-            element: <div>test2</div>
-          }
-        ]
-      },
-      {
-        path: "transaction",
-        element: <div>transaction</div>
-      },
-      {
-        path: "authorization",
-        element: <div>authorization</div>
-      }
-    ]
-  }
-]);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

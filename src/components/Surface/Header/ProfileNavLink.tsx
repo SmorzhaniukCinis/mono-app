@@ -4,7 +4,7 @@ import { Menu, MenuItem } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 interface props {
-  closeProfile: () => void
+  closeProfile: (path: string) => void
 }
 
 const ProfileNavLink: React.FC<props> = ({ closeProfile }:props) => {
@@ -16,9 +16,9 @@ const ProfileNavLink: React.FC<props> = ({ closeProfile }:props) => {
     setAnchorEl(event.currentTarget);
   }
 
-  const handleClose = (): void => {
+  const handleClose = (path?: string): void => {
     setAnchorEl(null);
-    closeProfile()
+    path != null && closeProfile(path)
   };
 
   return (
@@ -27,10 +27,10 @@ const ProfileNavLink: React.FC<props> = ({ closeProfile }:props) => {
           Profile
           <KeyboardArrowDownIcon sx={{fontSize: 20, position: 'relative', top: 4}}/>
         </Typography>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem sx={{ fontWeight: "bold"}} onClick={handleClose}>Information</MenuItem>
-        <MenuItem sx={{ fontWeight: "bold"}} onClick={handleClose}>Accounts</MenuItem>
-        <MenuItem sx={{ fontWeight: "bold"}} onClick={handleClose}>Jars</MenuItem>
+      <Menu anchorEl={anchorEl} open={open} onClose={()=>handleClose()}>
+        <MenuItem sx={{ fontWeight: "bold"}} onClick={()=>handleClose('profile/info')}>Information</MenuItem>
+        <MenuItem sx={{ fontWeight: "bold"}} onClick={()=>handleClose('profile/accounts')}>Accounts</MenuItem>
+        <MenuItem sx={{ fontWeight: "bold"}} onClick={()=>handleClose('profile/jars')}>Jars</MenuItem>
       </Menu>
     </MenuItem>
   );
