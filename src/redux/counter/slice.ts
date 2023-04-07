@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { currencyType } from "../../API/PublicDataTypes";
 
 export interface initialStateType {
-  currency: currencyType[];
+  currency: currencyType[]
+  isRequestReady: boolean
 }
 
 const initialState: initialStateType = {
-  currency: []
+  currency: [],
+  isRequestReady: true
 };
 
 export const publicDataSlice = createSlice({
@@ -15,9 +17,12 @@ export const publicDataSlice = createSlice({
   reducers: {
     setCurrency: (state, action: PayloadAction<currencyType[]>) => {
       state.currency = action.payload;
+    },
+    setIsRequestReady: (state) => {
+      state.isRequestReady = !state.isRequestReady
     }
   }
 });
 
 export default publicDataSlice.reducer;
-export const {setCurrency} = publicDataSlice.actions;
+export const {setCurrency, setIsRequestReady} = publicDataSlice.actions;

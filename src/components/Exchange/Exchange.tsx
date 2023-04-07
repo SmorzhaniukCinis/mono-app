@@ -39,11 +39,11 @@ const Exchange: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const currency = useAppSelector((state): currencyType[] => state.publicData.currency);
+  const isRequestReady = useAppSelector((state): boolean => state.publicData.isRequestReady);
 
   useEffect(() => {
-    dispatch(publicDataAction.getCurrency());
+    isRequestReady && dispatch(publicDataAction.getCurrency());
   }, []);
-  console.log(cc.number("840"));
 
   const getCurrencyRate = (rate: number): string => {
     if (rate === 0) return "-";
