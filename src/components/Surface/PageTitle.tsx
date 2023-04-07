@@ -7,7 +7,7 @@ interface props {
 
 const PageTitle:React.FC<props> = ({title}:props) => {
   return (
-    <Typography variant='h4' sx={{pb: 3, pt: 1}}>{title}</Typography>
+    <Typography variant='h4' sx={{pb: 3, pt: 2}}>{title}</Typography>
   );
 };
 

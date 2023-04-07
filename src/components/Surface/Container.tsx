@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 const Container: React.FC = () => {
   return (
     <Box minHeight="80vh">
-      <Box  sx={{padding: {xs: '0 5%', md: '30px 15%'}}}>
+      <Box  sx={{padding: {xs: '1%', md: '30px 15%'}}}>
         <Paper elevation={5} sx={{p: {xs: 1, md: 4}}}>
           <Outlet/>
         </Paper>
