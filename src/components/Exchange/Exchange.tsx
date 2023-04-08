@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { publicDataAction } from "../../redux/counter/saga";
+import { publicDataAction } from "../../redux/persists/saga";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import cc from "currency-codes";
 import { currencyType } from "../../API/PublicDataTypes";
@@ -38,8 +38,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Exchange: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const currency = useAppSelector((state): currencyType[] => state.publicData.currency);
-  const isRequestReady = useAppSelector((state): boolean => state.publicData.isRequestReady);
+  const currency = useAppSelector((state): currencyType[] => state.persistData.currency);
+  const isRequestReady = useAppSelector((state): boolean => state.persistData.isRequestReady);
 
   useEffect(() => {
     isRequestReady && dispatch(publicDataAction.getCurrency());

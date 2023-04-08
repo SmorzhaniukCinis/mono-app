@@ -1,7 +1,7 @@
 import { call, ForkEffect, put, takeEvery } from "redux-saga/effects";
 import { PublicDataAPI } from "../../API/PublicDataAPI";
-import { setCurrency, setIsRequestReady } from "./slice";
-import { currencyType, FETCH_CURRENCY } from "../../API/PublicDataTypes";
+import { setCurrency, setIsRequestReady } from "./persistSlice";
+import { currencyType } from "../../API/PublicDataTypes";
 
 export function* fetchCurrency(): any {
   yield put(setIsRequestReady())
@@ -22,5 +22,7 @@ export const publicDataAction = {
 };
 
 const publicDataSagas = watchPublicDataSagas;
+
+const FETCH_CURRENCY = 'FETCH_CURRENCY'
 
 export default publicDataSagas;

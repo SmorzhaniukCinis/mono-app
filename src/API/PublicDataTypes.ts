@@ -6,4 +6,4 @@ export interface currencyType {
   rateCross: number
   rateSell: number
 }
-export const FETCH_CURRENCY = 'FETCH_CURRENCY'
+

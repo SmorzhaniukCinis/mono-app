@@ -4,15 +4,17 @@ import { currencyType } from "../../API/PublicDataTypes";
 export interface initialStateType {
   currency: currencyType[]
   isRequestReady: boolean
+  token: string
 }
 
 const initialState: initialStateType = {
   currency: [],
-  isRequestReady: true
+  isRequestReady: true,
+  token: ''
 };
 
-export const publicDataSlice = createSlice({
-  name: "publicData",
+export const persistDataSlice = createSlice({
+  name: "persistData",
   initialState,
   reducers: {
     setCurrency: (state, action: PayloadAction<currencyType[]>) => {
@@ -20,9 +22,13 @@ export const publicDataSlice = createSlice({
     },
     setIsRequestReady: (state) => {
       state.isRequestReady = !state.isRequestReady
-    }
+    },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+      localStorage.setItem('token', action.payload)
+    },
   }
 });
 
-export default publicDataSlice.reducer;
-export const {setCurrency, setIsRequestReady} = publicDataSlice.actions;
+export default persistDataSlice.reducer;
+export const {setCurrency, setIsRequestReady, setToken} = persistDataSlice.actions;

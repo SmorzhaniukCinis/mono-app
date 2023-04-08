@@ -1,27 +1,39 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import PageTitle from "../Surface/PageTitle";
-import { useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { personDataAction } from "../../redux/client/saga";
+import { getToken } from "../../redux/selectors";
 
 const Authorization: React.FC = () => {
 
-  const [tokenField, setTokenField] = useState<string>("");
+  const [tokenField, setTokenField] = useState<string>("uHZzmBxpJDv-RnX-AAg3b_69XUrnTkOm7Kxmy3xBmTu4");
   const [error, setError] = useState<string>("");
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const token  = useAppSelector(getToken)
 
   const validation = (): void => {
     if (tokenField.length === 44) {
-      console.log("success");
+      checkToken(tokenField)
       setError("");
     } else {
       setError("Token must contain 44 chars.");
     }
-  };
+  }
+  const checkToken = (token: string):void => {
+    dispatch(personDataAction.getClientInfo(token))
+  }
+  useEffect(() => {
+    if (token !== '')
+      navigate('profile')
+  },[])
 
   return (
     <div>
@@ -50,7 +62,8 @@ const Authorization: React.FC = () => {
           </Box>
           : null
       }
-      <Button size='large' variant={"outlined"} onClick={() => validation()} color="success" sx={{ color: "black", mt: 5, mb: 5 }}>
+      <Button size='large' variant={"outlined"} onClick={() => validation()}
+              color="success" sx={{ color: "black", mt: 5, mb: 5 }}>
         Sing in
       </Button>
     </div>
