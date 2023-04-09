@@ -30,8 +30,13 @@ export interface jars {
   "goal": number
 }
 
+export const CHECK_CLIENT_TOKEN = 'CHECK_CLIENT_TOKEN'
+export interface checkClientTokenType {
+  type: typeof CHECK_CLIENT_TOKEN,
+  token: string
+}
+
 export const FETCH_CLIENT_INFO = 'FETCH_CLIENT_INFO'
 export interface fetchClientInfoType {
-  type: typeof FETCH_CLIENT_INFO,
-  token: string
+  type: typeof FETCH_CLIENT_INFO
 }

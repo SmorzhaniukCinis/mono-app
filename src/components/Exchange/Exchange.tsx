@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { publicDataAction } from "../../redux/persists/saga";
+import { publicDataAction } from "../../redux/public/saga";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import cc from "currency-codes";
-import { currencyType } from "../../API/PublicDataTypes";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import PageTitle from "../Surface/PageTitle";
+import { getCurrency, getIsRequestReady } from "../../redux/selectors";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,12 +38,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Exchange: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const currency = useAppSelector((state): currencyType[] => state.persistData.currency);
-  const isRequestReady = useAppSelector((state): boolean => state.persistData.isRequestReady);
+  const currency = useAppSelector(getCurrency);
+  const isRequestReady = useAppSelector(getIsRequestReady);
 
   useEffect(() => {
     isRequestReady && dispatch(publicDataAction.getCurrency());
-  }, []);
+  }, [isRequestReady]);
 
   const getCurrencyRate = (rate: number): string => {
     if (rate === 0) return "-";
