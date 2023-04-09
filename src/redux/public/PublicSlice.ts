@@ -5,12 +5,14 @@ export interface initialStateType {
   currency: currencyType[];
   isRequestReady: boolean;
   isAppLoading: boolean
+  errorMessage: string
 }
 
 const initialState: initialStateType = {
   currency: [],
   isRequestReady: true,
-  isAppLoading: true
+  isAppLoading: true,
+  errorMessage: ''
 };
 
 export const publicDataSlice = createSlice({
@@ -25,9 +27,12 @@ export const publicDataSlice = createSlice({
     },
     SetIsAppLoading: (state, action: PayloadAction<boolean>) => {
       state.isAppLoading = action.payload
+    },
+    setErrorMessage: (state, action: PayloadAction<string>) => {
+      state.errorMessage = action.payload
     }
   }
 });
 
 export default publicDataSlice.reducer;
-export const { setCurrency, setIsRequestReady, SetIsAppLoading } = publicDataSlice.actions;
+export const { setCurrency, setIsRequestReady, SetIsAppLoading, setErrorMessage } = publicDataSlice.actions;

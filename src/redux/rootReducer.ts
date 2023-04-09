@@ -1,5 +1,5 @@
-import currencyReducer from "./public/slice";
-import personReducer from "./client/slice";
+import currencyReducer from "./public/PublicSlice";
+import personReducer from "./client/ClientSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 
 const rootReducer =  combineReducers({

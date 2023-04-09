@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { publicDataAction } from "../../redux/public/saga";
+import { publicDataAction } from "../../redux/public/PublicSaga";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import cc from "currency-codes";
 import { styled } from "@mui/material/styles";

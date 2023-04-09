@@ -4,7 +4,7 @@ import Footer from "./components/Surface/Footer";
 import Container from "./components/Surface/Container";
 import Box from "@mui/material/Box";
 import { useLocation, useNavigate } from "react-router-dom";
-import { personDataAction } from "./redux/client/saga";
+import { personDataAction } from "./redux/client/ClientSaga";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { getIsAppLoading, getIsClientInfoReady } from "./redux/selectors";
 import { Backdrop, CircularProgress } from "@mui/material";

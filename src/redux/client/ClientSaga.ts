@@ -1,5 +1,5 @@
 import { call, ForkEffect, put, takeEvery } from "redux-saga/effects";
-import { setClientInfo, setIsClientInfoReady, setToken } from "./slice";
+import { setClientInfo, setIsClientInfoReady, setToken } from "./ClientSlice";
 import { PersonDataAPI } from "../../API/PersonalDataAPI";
 import {
   CHECK_CLIENT_TOKEN,
@@ -8,13 +8,22 @@ import {
   FETCH_CLIENT_INFO,
   fetchClientInfoType
 } from "../../API/PersonDataTypes";
-import { SetIsAppLoading } from "../public/slice";
+import { setErrorMessage, SetIsAppLoading } from "../public/PublicSlice";
 
 export function* checkClientToken({ token }: checkClientTokenType): any {
-  const clientInfo: clientInfoType = yield call(PersonDataAPI.confirmToken, token);
-  if (clientInfo !== null && clientInfo !== undefined) {
-    yield put(setClientInfo(clientInfo));
-    yield put(setToken(token));
+  try {
+    const clientInfo: clientInfoType = yield call(PersonDataAPI.confirmToken, token);
+    if (clientInfo !== null && clientInfo !== undefined) {
+      yield put(setClientInfo(clientInfo));
+      yield put(setToken(token));
+    }
+  }
+  catch (e: any) {
+    if (e.response.status === 403) {
+      yield put(setErrorMessage('Wops... looks like token is invalid'))
+    }else if (e.response.status === 429) (
+      yield put(setErrorMessage('Ty many tries... try agan later'))
+    )
   }
 }
 

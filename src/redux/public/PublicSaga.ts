@@ -1,6 +1,6 @@
 import { call, ForkEffect, put, takeEvery } from "redux-saga/effects";
 import { PublicDataAPI } from "../../API/PublicDataAPI";
-import { setCurrency, setIsRequestReady } from "./slice";
+import { setCurrency, setIsRequestReady } from "./PublicSlice";
 import { currencyType } from "../../API/PublicDataTypes";
 
 export function* fetchCurrency(): any {

@@ -8,7 +8,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { personDataAction } from "../../redux/client/saga";
+import { personDataAction } from "../../redux/client/ClientSaga";
 
 const Authorization: React.FC = () => {
 
