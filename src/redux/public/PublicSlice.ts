@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { currencyType } from "../../API/PublicDataTypes";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 
 export interface initialStateType {
   currency: currencyType[];
   isRequestReady: boolean;
-  isAppLoading: boolean
-  errorMessage: string
+  isAppLoading: boolean;
+  errorMessages: string[];
 }
 
 const initialState: initialStateType = {
   currency: [],
   isRequestReady: true,
   isAppLoading: true,
-  errorMessage: ''
+  errorMessages: ["start"]
 };
 
 export const publicDataSlice = createSlice({
@@ -22,17 +24,29 @@ export const publicDataSlice = createSlice({
     setCurrency: (state, action: PayloadAction<currencyType[]>) => {
       state.currency = action.payload;
     },
-    setIsRequestReady: (state, action:PayloadAction<boolean>) => {
+    setIsRequestReady: (state, action: PayloadAction<boolean>) => {
       state.isRequestReady = action.payload;
     },
     SetIsAppLoading: (state, action: PayloadAction<boolean>) => {
-      state.isAppLoading = action.payload
+      state.isAppLoading = action.payload;
     },
     setErrorMessage: (state, action: PayloadAction<string>) => {
-      state.errorMessage = action.payload
+      state.errorMessages.push(action.payload);
+    },
+    cleanErrorMessage: (state, action: PayloadAction<string>) => {
+      const index = state.errorMessages.indexOf(action.payload);
+      state.errorMessages.splice(index, 1);
     }
   }
 });
 
-export default publicDataSlice.reducer;
-export const { setCurrency, setIsRequestReady, SetIsAppLoading, setErrorMessage } = publicDataSlice.actions;
+const persistConfig = {
+  key: "auth",
+  storage,
+  whitelist: ["currency"]
+};
+
+persistReducer(persistConfig, publicDataSlice.reducer);
+
+export default persistReducer(persistConfig, publicDataSlice.reducer);
+export const { setCurrency, setIsRequestReady, SetIsAppLoading, setErrorMessage, cleanErrorMessage } = publicDataSlice.actions;

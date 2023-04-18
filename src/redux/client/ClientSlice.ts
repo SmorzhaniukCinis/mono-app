@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { clientInfoType } from "../../API/PersonDataTypes";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+import { publicDataSlice } from "../public/PublicSlice";
 
 export interface initialStateType {
   clientInfo: clientInfoType | null
@@ -30,5 +33,13 @@ export const personDataSlice = createSlice({
   }
 });
 
-export default personDataSlice.reducer;
+const persistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['clientInfo', 'token']
+};
+
+persistReducer(persistConfig, publicDataSlice.reducer);
+
+export default persistReducer(persistConfig, personDataSlice.reducer);
 export const {setClientInfo, setToken, setIsClientInfoReady} = personDataSlice.actions;

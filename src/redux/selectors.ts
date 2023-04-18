@@ -8,3 +8,4 @@ export const getIsClientInfoReady = (state:RootState):boolean => state.personDat
 export const getIsAppLoading = (state:RootState):boolean => state.publicData.isAppLoading
 export const getCurrency = (state:RootState): currencyType[] => state.publicData.currency
 export const getIsRequestReady = (state:RootState): boolean => state.publicData.isRequestReady
+export const getErrorMessages = (state:RootState): string[] => state.publicData.errorMessages

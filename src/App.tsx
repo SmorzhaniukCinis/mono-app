@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { personDataAction } from "./redux/client/ClientSaga";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { getIsClientInfoReady } from "./redux/selectors";
-import ErrorMessage from "./components/Surface/ErrorMessage";
+import ErrorMessageWrapper from "./components/Surface/ErrorMessageWrapper";
 import AppLoader from "./components/Surface/AppLoader";
 
 function App(): JSX.Element {
@@ -31,10 +31,11 @@ function App(): JSX.Element {
     }
   }, []);
 
+
   return (
     <Box sx={{ backgroundColor: "secondary.main" }}>
       <AppLoader/>
-      <ErrorMessage />
+      <ErrorMessageWrapper />
       <Header />
       <Container />
       <Footer />

@@ -1,25 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import rootReducer from './rootReducer';
-import rootSaga from './rootSaga';
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
+import rootReducer from "./rootReducer";
+import rootSaga from "./rootSaga";
+import { persistStore } from "redux-persist";
 
-const persistConfig = {
-  key: 'root',
-  storage
-}
-const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const configureAppStore = (initialState = {}) => {
+const configureAppStore = (initialState = {}):any => {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
   const middleware = [sagaMiddleware];
 
   const store = configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer,
     middleware: (gDM) => gDM({serializableCheck: false}).concat([...middleware]),
     preloadedState: initialState,
     devTools: process.env.NODE_ENV !== 'production',

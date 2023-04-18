@@ -8,34 +8,44 @@ import {
   FETCH_CLIENT_INFO,
   fetchClientInfoType
 } from "../../API/PersonDataTypes";
-import { setErrorMessage, SetIsAppLoading } from "../public/PublicSlice";
+import { cleanErrorMessage, setErrorMessage, SetIsAppLoading } from "../public/PublicSlice";
 
 export function* checkClientToken({ token }: checkClientTokenType): any {
   try {
+    yield put(SetIsAppLoading(true))
     const clientInfo: clientInfoType = yield call(PersonDataAPI.confirmToken, token);
     if (clientInfo !== null && clientInfo !== undefined) {
       yield put(setClientInfo(clientInfo));
       yield put(setToken(token));
     }
-  }
-  catch (e: any) {
+  } catch (e: any) {
     if (e.response.status === 403) {
-      yield put(setErrorMessage('Wops... looks like token is invalid'))
-    }else if (e.response.status === 429) (
-      yield put(setErrorMessage('Ty many tries... try agan later'))
-    )
+      yield put(setErrorMessage("Wops... looks like token is invalid"))
+      yield setTimeout(() => {
+        console.log('here')
+         put(setErrorMessage("Wops... looks like token is invalid"))
+        // put(cleanErrorMessage("Wops... looks like token is invalid"));
+      }, 10000)
+    } else if (e.response.status === 429) {
+      yield put(setErrorMessage("Ty many tries... try agan later"))
+      yield setTimeout(() => {
+        put(cleanErrorMessage("Ty many tries... try agan later"));
+      }, 10000)
+    }
+  } finally {
+    yield put(SetIsAppLoading(false))
   }
 }
 
 export function* fetchClientInfo(): any {
-  yield put(setIsClientInfoReady(false))
-  yield put(SetIsAppLoading(true))
+  yield put(setIsClientInfoReady(false));
+  yield put(SetIsAppLoading(true));
   const clientInfo: clientInfoType = yield call(PersonDataAPI.getClientInfo);
   yield put(setClientInfo(clientInfo));
-  yield put(SetIsAppLoading(false))
-  yield setTimeout(()=> {
-    put(setIsClientInfoReady(true))
-  }, 10000)
+  yield put(SetIsAppLoading(false));
+  yield setTimeout(() => {
+    put(setIsClientInfoReady(true));
+  }, 10000);
 }
 
 export const personDataAction = {

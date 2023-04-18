@@ -1,36 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Collapse from "@mui/material/Collapse";
-import Box from "@mui/material/Box";
+import { cleanErrorMessage } from "../../redux/public/PublicSlice";
+import { useAppDispatch } from "../../redux/hooks";
 
-const ErrorMessage: React.FC = () => {
+interface props {
+  error: string;
+}
+
+const ErrorMessage: React.FC<props> = ({ error }) => {
 
   const [open, setOpen] = React.useState(true);
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    setTimeout(() => {
+        dispatch(cleanErrorMessage(error))
+      }, 3000)
+  },[])
 
   return (
-    <Box sx={{ position: "fixed", top: "90px", right: "20px" }}>
-      <Collapse in={open}>
-        <Alert
-          severity="error"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          Close me!
-        </Alert>
-      </Collapse>
-    </Box>
+    <Collapse in={open}>
+      <Alert
+        severity="error"
+        action={
+          <IconButton
+            aria-label="close"
+            color="inherit"
+            size="small"
+            onClick={() => {
+              setOpen(false);
+            }}>
+            <CloseIcon fontSize="inherit" />
+          </IconButton>
+        }
+      >
+        {error}
+      </Alert>
+    </Collapse>
   );
 };
 

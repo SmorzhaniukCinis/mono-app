@@ -1,13 +1,14 @@
 import { call, ForkEffect, put, takeEvery } from "redux-saga/effects";
 import { PublicDataAPI } from "../../API/PublicDataAPI";
-import { setCurrency, setIsRequestReady } from "./PublicSlice";
+import { setCurrency, SetIsAppLoading, setIsRequestReady } from "./PublicSlice";
 import { currencyType } from "../../API/PublicDataTypes";
 
 export function* fetchCurrency(): any {
+  yield put(SetIsAppLoading(true))
   yield put(setIsRequestReady(false))
   const currency: currencyType[] = yield call(PublicDataAPI.getCurrency);
   yield put(setCurrency(currency))
-
+  yield put(SetIsAppLoading(false))
   yield setTimeout(() => {
     put(setIsRequestReady(true))
   }, 10000)
