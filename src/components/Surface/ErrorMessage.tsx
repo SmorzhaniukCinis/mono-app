@@ -18,11 +18,11 @@ const ErrorMessage: React.FC<props> = ({ error }) => {
   useEffect(() => {
     setTimeout(() => {
         dispatch(cleanErrorMessage(error))
-      }, 3000)
+      }, 10000)
   },[])
 
   return (
-    <Collapse in={open}>
+    <Collapse sx={{mb: 1}} in={open}>
       <Alert
         severity="error"
         action={

@@ -4,18 +4,18 @@ import { setCurrency, SetIsAppLoading, setIsRequestReady } from "./PublicSlice";
 import { currencyType } from "../../API/PublicDataTypes";
 
 export function* fetchCurrency(): any {
-  yield put(SetIsAppLoading(true))
-  yield put(setIsRequestReady(false))
+  yield put(SetIsAppLoading(true));
+  yield put(setIsRequestReady(false));
   const currency: currencyType[] = yield call(PublicDataAPI.getCurrency);
-  yield put(setCurrency(currency))
-  yield put(SetIsAppLoading(false))
+  yield put(setCurrency(currency));
+  yield put(SetIsAppLoading(false));
   yield setTimeout(() => {
-    put(setIsRequestReady(true))
-  }, 10000)
+    put(setIsRequestReady(true));
+  }, 10000);
 }
 
 export const publicDataAction = {
-  getCurrency: () => ({ type: FETCH_CURRENCY }),
+  getCurrency: () => ({ type: FETCH_CURRENCY })
 };
 
 
@@ -26,6 +26,6 @@ export function* watchPublicDataSagas(): Generator<ForkEffect, void> {
 
 const publicDataSagas = watchPublicDataSagas;
 
-const FETCH_CURRENCY = 'FETCH_CURRENCY_1'
+const FETCH_CURRENCY = "FETCH_CURRENCY_1";
 
 export default publicDataSagas;

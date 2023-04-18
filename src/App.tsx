@@ -26,7 +26,7 @@ function App(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (token !== undefined && isClientInfoReady) {
+    if (token !== '' && isClientInfoReady) {
       dispatch(personDataAction.fetchClientInfo());
     }
   }, []);

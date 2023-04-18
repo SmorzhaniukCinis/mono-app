@@ -14,7 +14,7 @@ const initialState: initialStateType = {
   currency: [],
   isRequestReady: true,
   isAppLoading: true,
-  errorMessages: ["start"]
+  errorMessages: []
 };
 
 export const publicDataSlice = createSlice({

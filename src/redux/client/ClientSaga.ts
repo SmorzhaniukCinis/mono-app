@@ -8,11 +8,11 @@ import {
   FETCH_CLIENT_INFO,
   fetchClientInfoType
 } from "../../API/PersonDataTypes";
-import { cleanErrorMessage, setErrorMessage, SetIsAppLoading } from "../public/PublicSlice";
+import { setErrorMessage, SetIsAppLoading } from "../public/PublicSlice";
 
 export function* checkClientToken({ token }: checkClientTokenType): any {
   try {
-    yield put(SetIsAppLoading(true))
+    yield put(SetIsAppLoading(true));
     const clientInfo: clientInfoType = yield call(PersonDataAPI.confirmToken, token);
     if (clientInfo !== null && clientInfo !== undefined) {
       yield put(setClientInfo(clientInfo));
@@ -20,20 +20,14 @@ export function* checkClientToken({ token }: checkClientTokenType): any {
     }
   } catch (e: any) {
     if (e.response.status === 403) {
-      yield put(setErrorMessage("Wops... looks like token is invalid"))
-      yield setTimeout(() => {
-        console.log('here')
-         put(setErrorMessage("Wops... looks like token is invalid"))
-        // put(cleanErrorMessage("Wops... looks like token is invalid"));
-      }, 10000)
+      yield put(setErrorMessage("Wops... looks like token is invalid"));
     } else if (e.response.status === 429) {
-      yield put(setErrorMessage("Ty many tries... try agan later"))
-      yield setTimeout(() => {
-        put(cleanErrorMessage("Ty many tries... try agan later"));
-      }, 10000)
+      yield put(setErrorMessage("Ty many tries... try agan later"));
+    } else {
+      yield put(setErrorMessage(e.response.data.errorDescription));
     }
   } finally {
-    yield put(SetIsAppLoading(false))
+    yield put(SetIsAppLoading(false));
   }
 }
 
