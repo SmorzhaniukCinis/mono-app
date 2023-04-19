@@ -5,7 +5,7 @@ import { Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../../redux/hooks";
-import { setToken } from "../../../redux/client/ClientSlice";
+import { setClientInfo, setToken } from "../../../redux/client/ClientSlice";
 
 const modalStyle = {
   width: { md: "auto", xs: "70%" },
@@ -32,6 +32,7 @@ const LogoutModal: React.FC<props> = ({ isModalOpen, closeModal }: props) => {
 
   const logout = (): void => {
     dispatch(setToken(""));
+    dispatch(setClientInfo(null));
     closeModal();
   };
 

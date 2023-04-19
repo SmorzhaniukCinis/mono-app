@@ -32,14 +32,14 @@ export function* checkClientToken({ token }: checkClientTokenType): any {
 }
 
 export function* fetchClientInfo(): any {
-  yield put(setIsClientInfoReady(false));
-  yield put(SetIsAppLoading(true));
-  const clientInfo: clientInfoType = yield call(PersonDataAPI.getClientInfo);
-  yield put(setClientInfo(clientInfo));
-  yield put(SetIsAppLoading(false));
-  yield setTimeout(() => {
-    put(setIsClientInfoReady(true));
-  }, 10000);
+  try {
+    yield put(setIsClientInfoReady(false));
+    yield put(SetIsAppLoading(true));
+    const clientInfo: clientInfoType = yield call(PersonDataAPI.getClientInfo);
+    yield put(setClientInfo(clientInfo));
+  } finally {
+    yield put(SetIsAppLoading(false));
+  }
 }
 
 export const personDataAction = {

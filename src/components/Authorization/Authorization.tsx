@@ -13,8 +13,8 @@ const Authorization: React.FC = () => {
   const [tokenField, setTokenField] = useState<string>("uHZzmBxpJDv-RnX-AAg3b_69XUrnTkOm7Kxmy3xBmTu4");
   const [error, setError] = useState<string>("");
   const dispatch = useAppDispatch();
-  const token = useAppSelector(getToken);
-  const navigate = useNavigate();
+  const token = useAppSelector(getToken)
+  const navigate = useNavigate()
 
   const validation = (): void => {
     if (tokenField.length === 44) {
@@ -29,9 +29,9 @@ const Authorization: React.FC = () => {
   };
 
   useEffect(() => {
-    if (token !== "")
-      navigate("/profile/info");
-  }, [token]);
+    if(token !== '')
+    navigate('/profile/info')
+  }, [token])
 
   return (
     <div>

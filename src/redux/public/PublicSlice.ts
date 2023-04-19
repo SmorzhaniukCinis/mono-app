@@ -13,7 +13,7 @@ export interface initialStateType {
 const initialState: initialStateType = {
   currency: [],
   isRequestReady: true,
-  isAppLoading: true,
+  isAppLoading: false,
   errorMessages: []
 };
 
@@ -41,7 +41,7 @@ export const publicDataSlice = createSlice({
 });
 
 const persistConfig = {
-  key: "auth",
+  key: "public",
   storage,
   whitelist: ["currency"]
 };
@@ -49,4 +49,10 @@ const persistConfig = {
 persistReducer(persistConfig, publicDataSlice.reducer);
 
 export default persistReducer(persistConfig, publicDataSlice.reducer);
-export const { setCurrency, setIsRequestReady, SetIsAppLoading, setErrorMessage, cleanErrorMessage } = publicDataSlice.actions;
+export const {
+  setCurrency,
+  setIsRequestReady,
+  SetIsAppLoading,
+  setErrorMessage,
+  cleanErrorMessage
+} = publicDataSlice.actions;

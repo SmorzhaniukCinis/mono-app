@@ -25,7 +25,6 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <PersistGate persistor={persistor}>
@@ -33,6 +32,5 @@ root.render(
         </PersistGate>
       </ThemeProvider>
     </Provider>
-  </React.StrictMode>
 );
 

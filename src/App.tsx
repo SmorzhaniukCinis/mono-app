@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { getIsClientInfoReady } from "./redux/selectors";
 import ErrorMessageWrapper from "./components/Surface/ErrorMessageWrapper";
 import AppLoader from "./components/Surface/AppLoader";
+import { setIsClientInfoReady } from "./redux/client/ClientSlice";
 
 function App(): JSX.Element {
 
@@ -28,6 +29,9 @@ function App(): JSX.Element {
   useEffect(() => {
     if (token !== '' && isClientInfoReady) {
       dispatch(personDataAction.fetchClientInfo());
+      setTimeout(() => {
+        dispatch(setIsClientInfoReady(true));
+      }, 10000);
     }
   }, []);
 

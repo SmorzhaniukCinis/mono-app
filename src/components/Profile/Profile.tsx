@@ -12,7 +12,7 @@ const Profile:React.FC = () => {
     if (token === '') {
       navigate('/authorization')
     }
-  }, [])
+  }, [token])
 
   return (
     <div>

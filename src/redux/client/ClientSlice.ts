@@ -20,7 +20,7 @@ export const personDataSlice = createSlice({
   name: "personData",
   initialState,
   reducers: {
-    setClientInfo: (state, action: PayloadAction<clientInfoType>) => {
+    setClientInfo: (state, action: PayloadAction<clientInfoType | null>) => {
       state.clientInfo = action.payload;
     },
     setToken: (state, action: PayloadAction<string>) => {
@@ -34,7 +34,7 @@ export const personDataSlice = createSlice({
 });
 
 const persistConfig = {
-  key: 'auth',
+  key: 'client',
   storage,
   whitelist: ['clientInfo', 'token']
 };
