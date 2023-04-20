@@ -44,8 +44,6 @@ const FullNav: React.FC = () => {
       </Button>
       <Menu anchorEl={anchorEl} open={open} onClose={() => handleClose()}>
         <MenuItem sx={{ fontSize: 15, fontWeight: "bold" }}
-                  onClick={() => handleClose("profile/info")}>Information</MenuItem>
-        <MenuItem sx={{ fontSize: 15, fontWeight: "bold" }}
                   onClick={() => handleClose("profile/accounts")}>Accounts</MenuItem>
         <MenuItem sx={{ fontSize: 15, fontWeight: "bold" }} onClick={() => handleClose("profile/jars")}>Jars</MenuItem>
       </Menu>

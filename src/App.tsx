@@ -4,38 +4,20 @@ import Footer from "./components/Surface/Footer";
 import Container from "./components/Surface/Container";
 import Box from "@mui/material/Box";
 import { useLocation, useNavigate } from "react-router-dom";
-import { personDataAction } from "./redux/client/ClientSaga";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
-import { getIsClientInfoReady } from "./redux/selectors";
 import ErrorMessageWrapper from "./components/Surface/ErrorMessageWrapper";
 import AppLoader from "./components/Surface/AppLoader";
-import { setIsClientInfoReady } from "./redux/client/ClientSlice";
 
 function App(): JSX.Element {
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const token = localStorage.getItem("token");
-  const isClientInfoReady = useAppSelector(getIsClientInfoReady);
-
 
   useEffect(() => {
     if (pathname === "/") {
       navigate("/exchange");
     }
   }, []);
-
-  useEffect(() => {
-    if (token !== '' && isClientInfoReady) {
-      dispatch(personDataAction.fetchClientInfo());
-      setTimeout(() => {
-        dispatch(setIsClientInfoReady(true));
-      }, 10000);
-    }
-  }, []);
-
-
+  
   return (
     <Box sx={{ backgroundColor: "secondary.main" }}>
       <AppLoader/>

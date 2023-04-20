@@ -28,7 +28,6 @@ const ProfileNavLink: React.FC<props> = ({ closeProfile }:props) => {
           <KeyboardArrowDownIcon sx={{fontSize: 20, position: 'relative', top: 4}}/>
         </Typography>
       <Menu anchorEl={anchorEl} open={open} onClose={()=>handleClose()}>
-        <MenuItem sx={{ fontWeight: "bold"}} onClick={()=>handleClose('profile/info')}>Information</MenuItem>
         <MenuItem sx={{ fontWeight: "bold"}} onClick={()=>handleClose('profile/accounts')}>Accounts</MenuItem>
         <MenuItem sx={{ fontWeight: "bold"}} onClick={()=>handleClose('profile/jars')}>Jars</MenuItem>
       </Menu>

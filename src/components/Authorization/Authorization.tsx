@@ -30,7 +30,7 @@ const Authorization: React.FC = () => {
 
   useEffect(() => {
     if(token !== '')
-    navigate('/profile/info')
+    navigate('/profile/accounts')
   }, [token])
 
   return (

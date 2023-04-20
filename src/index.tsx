@@ -11,7 +11,7 @@ import { PersistGate } from "redux-persist/integration/react";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#ffffff"
+      main: "#000000",
     },
     secondary: {
       main: "#e3d9ec",
