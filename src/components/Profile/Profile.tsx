@@ -16,9 +16,7 @@ const Profile:React.FC = () => {
   const isClientInfoReady = useAppSelector(getIsClientInfoReady);
 
   useEffect(() => {
-    if (token === '') {
-      navigate('/authorization')
-    }
+    if (token === '') navigate('/authorization')
   }, [token])
 
   useEffect(() => {
