@@ -4,11 +4,11 @@ export interface clientInfoType {
   name : string
   webHookUrl : string
   permissions : string
-  accounts: accounts[]
-  jars: jars[]
+  accounts: account[]
+  jars: jar[]
 }
 
-export interface accounts {
+export interface account {
   "id": string,
   "sendId": string
   "balance": number
@@ -20,7 +20,7 @@ export interface accounts {
   "iban": string
 }
 
-export interface jars {
+export interface jar {
   "id": string
   "sendId": string
   "title": string
