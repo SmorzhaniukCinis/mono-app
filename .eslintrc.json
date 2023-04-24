@@ -21,7 +21,7 @@
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".tff"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".tff", ".jpg"]
       }
     }
   },

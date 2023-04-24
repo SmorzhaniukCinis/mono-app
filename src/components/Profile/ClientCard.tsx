@@ -2,12 +2,12 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import cc from "currency-codes";
-import { account } from "../../API/PersonDataTypes";
+import { accountType } from "../../API/PersonDataTypes";
 
 interface props {
   textColor: string;
   cardColor: string;
-  account: account
+  account: accountType
 }
 
 const createCardStyle = (color: string):any => ({
@@ -32,7 +32,6 @@ const refactorBalance = (balance: number, currencyCode: number): string => {
 };
 
 const ClientCard: React.FC<props> = ({ cardColor, textColor, account }: props) => {
-  
   return (
     <Box sx={createCardStyle(cardColor)}>
       <Box display="flex" justifyContent="space-between">
