@@ -1,12 +1,12 @@
 import { call, ForkEffect, put, takeEvery } from "redux-saga/effects";
-import { setClientInfo, setIsClientInfoReady, setToken } from "./ClientSlice";
+import { setClientInfo, setIsClientInfoReady, setIsTransactionsReady, setToken, setTransactions } from "./ClientSlice";
 import { PersonDataAPI } from "../../API/PersonalDataAPI";
 import {
   CHECK_CLIENT_TOKEN,
   checkClientTokenType,
   clientInfoType,
-  FETCH_CLIENT_INFO,
-  fetchClientInfoType
+  FETCH_CLIENT_INFO, FETCH_TRANSACTIONS,
+  fetchClientInfoType, fetchTransactionsType, transactionType
 } from "../../API/PersonDataTypes";
 import { setErrorMessage, SetIsAppLoading } from "../public/PublicSlice";
 
@@ -35,8 +35,19 @@ export function* fetchClientInfo(): any {
   try {
     yield put(setIsClientInfoReady(false));
     yield put(SetIsAppLoading(true));
-    const clientInfo: clientInfoType = yield call(PersonDataAPI.getClientInfo);
+    const clientInfo: clientInfoType = yield call(PersonDataAPI.getClientInfo)
     yield put(setClientInfo(clientInfo));
+  } finally {
+    yield put(SetIsAppLoading(false));
+  }
+}
+
+export function* fetchTransaction({ account, to, from }: fetchTransactionsType): any {
+  try {
+    yield put(setIsTransactionsReady(false));
+    yield put(SetIsAppLoading(true));
+    const transactions: transactionType[] = yield call(PersonDataAPI.getTransaction, account, from, to)
+    yield put(setTransactions(transactions));
   } finally {
     yield put(SetIsAppLoading(false));
   }
@@ -44,13 +55,20 @@ export function* fetchClientInfo(): any {
 
 export const personDataAction = {
   checkClientToken: (token: string): checkClientTokenType => ({ type: CHECK_CLIENT_TOKEN, token }),
-  fetchClientInfo: (): fetchClientInfoType => ({ type: FETCH_CLIENT_INFO })
+  fetchClientInfo: (): fetchClientInfoType => ({ type: FETCH_CLIENT_INFO }),
+  fetchTransactions: (account: string, from: string, to?: string ): fetchTransactionsType => ({
+    type: FETCH_TRANSACTIONS,
+    account,
+    from,
+    to
+  })
 };
 
 
 export function* watchPersonDataSagas(): Generator<ForkEffect, void> {
   yield takeEvery(CHECK_CLIENT_TOKEN, checkClientToken);
   yield takeEvery(FETCH_CLIENT_INFO, fetchClientInfo);
+  yield takeEvery(FETCH_TRANSACTIONS, fetchTransaction);
 }
 
 

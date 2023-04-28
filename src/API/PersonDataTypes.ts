@@ -30,11 +30,41 @@ export interface jarType {
   "goal": number
 }
 
+export interface transactionType {
+  "id": string
+  "time": number
+  "description": string
+  "mcc": number
+  "originalMcc": number
+  "hold": false,
+  "amount": number
+  "operationAmount": number
+  "currencyCode": number
+  "commissionRate": number
+  "cashbackAmount": number
+  "balance": number
+  "comment": string
+  "receiptId": string
+  "invoiceId": string
+  "counterEdrpou": string
+  "counterIban": string
+  "counterName": string
+}
+
 export const CHECK_CLIENT_TOKEN = 'CHECK_CLIENT_TOKEN'
 export interface checkClientTokenType {
   type: typeof CHECK_CLIENT_TOKEN,
   token: string
 }
+
+export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS'
+export interface fetchTransactionsType {
+  type: typeof FETCH_TRANSACTIONS,
+  account: string
+  from: string
+  to?: string
+}
+
 
 export const FETCH_CLIENT_INFO = 'FETCH_CLIENT_INFO'
 export interface fetchClientInfoType {
