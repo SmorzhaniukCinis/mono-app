@@ -1,5 +1,5 @@
 import { RootState } from "./store";
-import { clientInfoType } from "../API/PersonDataTypes";
+import { clientInfoType, transactionType } from "../API/PersonDataTypes";
 import { currencyType } from "../API/PublicDataTypes";
 
 export const getClientInfoSelector = (state:RootState):clientInfoType | null => state.personData.clientInfo
@@ -9,3 +9,5 @@ export const getIsAppLoading = (state:RootState):boolean => state.publicData.isA
 export const getCurrency = (state:RootState): currencyType[] => state.publicData.currency
 export const getIsRequestReady = (state:RootState): boolean => state.publicData.isRequestReady
 export const getErrorMessages = (state:RootState): string[] => state.publicData.errorMessages
+export const getTransactions = (state:RootState): transactionType[] => state.personData.transactions
+export const getIsTransactionsReady = (state:RootState): boolean => state.personData.isTransactionsReady
