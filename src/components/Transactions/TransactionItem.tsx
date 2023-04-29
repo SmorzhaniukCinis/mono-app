@@ -20,8 +20,8 @@ const TransactionItem: React.FC<props> = ({ transaction }) => {
   const date = moment.unix(transaction.time).format("MMMM D YYYY, h:mm A");
 
   return (
-    <Paper sx={{ mb: 1, p: 1, display: "flex", backgroundColor: BGcolor }}>
-      <Box sx={{ width: { md: "16%", xs: "30%" }, pl: { md: 3, xs: 0 }, display: "flex", alignItems: "center" }}>
+    <Paper sx={{ mb: 1, p: 1, display: "flex", alignItems: "center", backgroundColor: BGcolor }}>
+      <Box sx={{ width: { md: "16%", xs: "30%" }, pl: { md: 3, xs: 0 }}}>
         <Typography component="span" sx={{ fontSize: { md: 30, xs: 20 } }}>{firstDigits}</Typography>
         <Typography component="span" sx={{ fontSize: { md: 21, xs: 15 } }}>{secondDigits}</Typography>
         <Typography component="span" sx={{ fontSize: { md: 25, xs: 17 } }}> {currency}</Typography>
