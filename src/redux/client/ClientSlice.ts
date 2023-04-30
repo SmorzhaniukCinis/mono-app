@@ -46,7 +46,7 @@ export const personDataSlice = createSlice({
 const persistConfig = {
   key: 'client',
   storage,
-  whitelist: ['clientInfo', 'token', 'transaction']
+  whitelist: ['clientInfo', 'token', 'transactions']
 };
 
 persistReducer(persistConfig, publicDataSlice.reducer);
